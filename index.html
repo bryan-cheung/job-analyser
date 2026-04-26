@@ -54,13 +54,15 @@
 
     .app.compare-mode,
     .app.requests-mode,
-    .app.predefined-mode {
+    .app.predefined-mode,
+    .app.micro-mode {
       grid-template-columns: 260px minmax(0, 1fr);
     }
 
     .app.compare-mode .drawer,
     .app.requests-mode .drawer,
-    .app.predefined-mode .drawer {
+    .app.predefined-mode .drawer,
+    .app.micro-mode .drawer {
       display: none;
     }
 
@@ -198,7 +200,8 @@
 
     .app.compare-mode .main,
     .app.requests-mode .main,
-    .app.predefined-mode .main {
+    .app.predefined-mode .main,
+    .app.micro-mode .main {
       grid-column: 2;
     }
 
@@ -1673,7 +1676,8 @@
 
       .app.compare-mode,
       .app.requests-mode,
-      .app.predefined-mode {
+      .app.predefined-mode,
+      .app.micro-mode {
         grid-template-columns: 76px minmax(0, 1fr);
       }
 
@@ -1702,7 +1706,8 @@
 
       .app.compare-mode .main,
       .app.requests-mode .main,
-      .app.predefined-mode .main {
+      .app.predefined-mode .main,
+      .app.micro-mode .main {
         grid-column: auto;
       }
 
@@ -1869,435 +1874,37 @@
 
     <aside class="sidebar" aria-label="Main navigation">
       <nav class="nav-section">
-        <button class="nav-item active" id="overviewNav" type="button">
+        <button class="nav-item active" id="overviewNav" data-view="overview" type="button">
           <svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
           <span>Overview</span>
         </button>
       </nav>
       <nav class="nav-section">
         <div class="nav-title">Analysis</div>
-        <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M3 11h18"/></svg><span>Jobs</span></button>
-        <button class="nav-item" id="compareNav" type="button"><svg viewBox="0 0 24 24"><path d="M8 3v18"/><path d="M16 3v18"/><path d="M3 8h18"/><path d="M3 16h18"/><path d="m7 12-3-3 3-3"/><path d="m17 12 3 3-3 3"/></svg><span>Compare Jobs</span></button>
-        <button class="nav-item" id="requestNav" type="button"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h6"/></svg><span>Requests</span></button>
-        <button class="nav-item" id="predefinedNav" type="button"><svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 11h18"/><path d="M7 15h3"/><path d="M14 15h3"/></svg><span>Predefined Jobs</span></button>
-        <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-7"/></svg><span>Performance</span></button>
-        <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Breakdown</span></button>
+        <button class="nav-item" id="jobsNav" data-view="jobs" type="button"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M3 11h18"/></svg><span>Jobs</span></button>
+        <button class="nav-item" id="compareNav" data-view="compare" type="button"><svg viewBox="0 0 24 24"><path d="M8 3v18"/><path d="M16 3v18"/><path d="M3 8h18"/><path d="M3 16h18"/><path d="m7 12-3-3 3-3"/><path d="m17 12 3 3-3 3"/></svg><span>Compare Jobs</span></button>
+        <button class="nav-item" id="requestNav" data-view="requests" type="button"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h6"/></svg><span>Requests</span></button>
+        <button class="nav-item" id="predefinedNav" data-view="predefined" type="button"><svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 11h18"/><path d="M7 15h3"/><path d="M14 15h3"/></svg><span>Predefined Jobs</span></button>
+        <button class="nav-item" id="performanceNav" data-view="performance" type="button"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-7"/></svg><span>Performance</span></button>
+        <button class="nav-item" id="breakdownNav" data-view="breakdown" type="button"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Breakdown</span></button>
       </nav>
       <nav class="nav-section">
         <div class="nav-title">Configuration</div>
-        <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span>Alerts</span></button>
-        <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-5"/></svg><span>SLA</span></button>
-        <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 1 0 12 8a3.5 3.5 0 0 0 0 7.5z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1A2 2 0 1 1 4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1A2 2 0 1 1 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3h.1a1.7 1.7 0 0 0 1-1.6V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.6h.1a1.7 1.7 0 0 0 1.9-.3l.1-.1A2 2 0 1 1 19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.6 1h.1a2 2 0 1 1 0 4H21a1.7 1.7 0 0 0-1.6 1z"/></svg><span>Settings</span></button>
+        <button class="nav-item" id="alertsNav" data-view="alerts" type="button"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span>Alerts</span></button>
+        <button class="nav-item" id="slaNav" data-view="sla" type="button"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-5"/></svg><span>SLA</span></button>
+        <button class="nav-item" id="settingsNav" data-view="settings" type="button"><svg viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 1 0 12 8a3.5 3.5 0 0 0 0 7.5z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1A2 2 0 1 1 4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1A2 2 0 1 1 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3h.1a1.7 1.7 0 0 0 1-1.6V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.6h.1a1.7 1.7 0 0 0 1.9-.3l.1-.1A2 2 0 1 1 19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.6 1h.1a2 2 0 1 1 0 4H21a1.7 1.7 0 0 0-1.6 1z"/></svg><span>Settings</span></button>
       </nav>
       <div class="sidebar-footer">
-        <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg><span>Docs</span></button>
-        <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg><span>Give Feedback</span></button>
+        <button class="nav-item" id="docsNav" data-view="docs" type="button"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg><span>Docs</span></button>
+        <button class="nav-item" id="feedbackNav" data-view="feedback" type="button"><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg><span>Give Feedback</span></button>
       </div>
     </aside>
 
     <main class="main">
-      <section class="page-head overview-only">
-        <div>
-          <h1>Job Performance Analysis</h1>
-          <p class="subtitle">Monitor and analyze pricing job performance and request breakdowns.</p>
-        </div>
-        <div class="health-chip"><span class="dot" style="--color: var(--green)"></span> Live sample data</div>
-      </section>
-
-      <section class="metrics overview-only" id="metrics"></section>
-
-      <section class="charts-grid overview-only">
-        <article class="panel">
-          <div class="panel-head">
-            <h2 class="panel-title">Average Time by Job Stage</h2>
-            <span class="info" aria-label="Average stage timing information"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
-          </div>
-          <div class="stack-chart" id="stageChart"></div>
-          <div class="legend" id="stageLegend"></div>
-        </article>
-
-        <article class="panel">
-          <div class="panel-head">
-            <h2 class="panel-title">Time Distribution (by Stage)</h2>
-          </div>
-          <div class="distribution">
-            <div class="donut">
-              <div class="donut-label">
-                <span>Total</span>
-                <strong id="donutTotal">02:45.36</strong>
-              </div>
-            </div>
-            <div class="dist-list" id="distributionRows"></div>
-          </div>
-        </article>
-      </section>
-
-      <section class="panel table-panel overview-only">
-        <div class="table-head">
-          <h2 class="panel-title">Jobs (<span id="jobCount">0</span>)</h2>
-          <div class="table-tools">
-            <label class="search">
-              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              <input id="jobSearch" type="search" placeholder="Search by Job ID, Status, or Metadata">
-            </label>
-            <button class="columns-button" type="button"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/><path d="M15 4v16"/></svg>Columns</button>
-          </div>
-        </div>
-        <div class="table-scroll">
-          <table class="jobs-table">
-            <thead>
-              <tr>
-                <th style="width: 130px">Job ID</th>
-                <th style="width: 92px">Status</th>
-                <th style="width: 90px">Total Time</th>
-                <th style="width: 88px">Trade Query</th>
-                <th style="width: 86px">VM Create</th>
-                <th style="width: 86px">Pricing</th>
-                <th style="width: 86px">VM Reclaim</th>
-                <th style="width: 90px">Result Ingest</th>
-                <th style="width: 90px">Post Process</th>
-                <th style="width: 82px">Requests</th>
-                <th style="width: 160px">Created At</th>
-                <th style="width: 34px"></th>
-              </tr>
-            </thead>
-            <tbody id="jobsBody"></tbody>
-          </table>
-          <div class="empty" id="emptyState">No jobs match the current search or filter.</div>
-        </div>
-        <div class="pagination">
-          <span>Rows per page:</span>
-          <button class="page-size" type="button">10</button>
-          <span id="rangeLabel">1-10 of 1,248</span>
-          <button class="page-button" type="button" aria-label="Previous page"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
-          <button class="page-button active" type="button">1</button>
-          <button class="page-button" type="button">2</button>
-          <button class="page-button" type="button">3</button>
-          <span>...</span>
-          <button class="page-button" type="button">125</button>
-          <button class="page-button" type="button" aria-label="Next page"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
-        </div>
-      </section>
-
-      <section class="compare-page hidden" id="comparePage">
-        <section class="page-head" style="margin-bottom: 2px">
-          <div>
-            <h1>Compare Jobs</h1>
-            <p class="subtitle">Select two jobs to compare their overall performance and breakdowns.</p>
-          </div>
-        </section>
-
-        <section class="compare-controls">
-          <label class="job-picker">
-            <strong>Job A</strong>
-            <span class="picker-field">
-              <select id="compareA" aria-label="Job A"></select>
-              <span class="status success">Success</span>
-            </span>
-          </label>
-          <button class="icon-button" id="swapCompare" type="button" aria-label="Swap compared jobs">
-            <svg viewBox="0 0 24 24"><path d="M17 3l4 4-4 4"/><path d="M3 7h18"/><path d="M7 21l-4-4 4-4"/><path d="M21 17H3"/></svg>
-          </button>
-          <label class="job-picker">
-            <strong>Job B</strong>
-            <span class="picker-field">
-              <select id="compareB" aria-label="Job B"></select>
-              <span class="status success">Success</span>
-            </span>
-          </label>
-          <button class="compare-button" id="runCompare" type="button">Compare</button>
-        </section>
-
-        <section class="compare-summary" id="compareSummary"></section>
-
-        <section class="panel compare-table-panel">
-          <div class="panel-head">
-            <h2 class="panel-title">Job Stage Breakdown <span class="info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span></h2>
-          </div>
-          <div class="compare-table-scroll">
-            <table class="compare-table">
-              <thead>
-                <tr class="group-head">
-                  <th style="width: 230px"></th>
-                  <th colspan="3" id="jobAGroup">Job A</th>
-                  <th colspan="3" id="jobBGroup">Job B</th>
-                  <th colspan="2">Difference</th>
-                  <th>Comparison</th>
-                </tr>
-                <tr>
-                  <th>Stage</th>
-                  <th>Time (s)</th>
-                  <th>% of Total</th>
-                  <th></th>
-                  <th>Time (s)</th>
-                  <th>% of Total</th>
-                  <th></th>
-                  <th>Time (s)</th>
-                  <th>%</th>
-                  <th><span class="legend-item"><span class="dot" style="--color: var(--blue)"></span>Job A</span> <span class="legend-item" style="margin-left:12px"><span class="dot" style="--color: var(--teal)"></span>Job B</span></th>
-                </tr>
-              </thead>
-              <tbody id="compareStageBody"></tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="compare-bottom">
-          <article class="panel compare-table-panel">
-            <div class="panel-head">
-              <h2 class="panel-title">Request Breakdown <span style="color:#64748b; font-weight:700">(Top 5 by Total Time)</span> <span class="info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span></h2>
-            </div>
-            <div class="compare-table-scroll">
-              <table class="compare-table request-compare-table">
-                <thead>
-                  <tr class="group-head">
-                    <th style="width: 170px"></th>
-                    <th colspan="2">Job A</th>
-                    <th colspan="2">Job B</th>
-                    <th colspan="2">Difference</th>
-                    <th>Comparison</th>
-                  </tr>
-                  <tr>
-                    <th>Request ID</th>
-                    <th>Total Time (s)</th>
-                    <th>% of Job</th>
-                    <th>Total Time (s)</th>
-                    <th>% of Job</th>
-                    <th>Time (s)</th>
-                    <th>%</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody id="compareRequestBody"></tbody>
-              </table>
-            </div>
-            <button class="compare-link" type="button">View all requests for both jobs <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></button>
-          </article>
-
-          <article class="panel">
-            <div class="panel-head">
-              <h2 class="panel-title">Visual Comparison <span style="color:#64748b; font-weight:700">(By % of Total Time)</span> <span class="info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span></h2>
-            </div>
-            <div class="visual-stack" id="visualCompare"></div>
-            <div class="legend" id="visualLegend"></div>
-            <div class="compare-insight" id="compareInsight"></div>
-          </article>
-        </section>
-      </section>
-
-      <section class="requests-page hidden" id="requestsPage">
-        <section class="page-head" style="margin-bottom: 2px">
-          <div>
-            <h1>Price Requests</h1>
-            <p class="subtitle">Inspect every price request and step-level execution metric for a selected job.</p>
-          </div>
-          <div class="health-chip"><span class="dot" style="--color: var(--blue)"></span> <span id="requestGridCount">10,000 requests</span></div>
-        </section>
-
-        <section class="request-grid-toolbar">
-          <label class="toolbar-field">
-            <span>Job A</span>
-            <select id="requestJobSelect" aria-label="Job for request grid"></select>
-          </label>
-          <label class="toolbar-field">
-            <span>Job B</span>
-            <select id="requestCompareJobSelect" aria-label="Second job for request grid"></select>
-          </label>
-          <label class="toolbar-field">
-            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input id="requestGridSearch" type="search" placeholder="Search request id, trade id, host">
-          </label>
-          <div class="request-grid-meta">
-            <span id="requestGridRange">1-100 of 10,000</span>
-            <button class="page-size" id="requestPrevPage" type="button" aria-label="Previous request page"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
-            <button class="page-size" id="requestNextPage" type="button" aria-label="Next request page"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
-          </div>
-        </section>
-
-        <section class="panel table-panel">
-          <div class="table-head">
-            <h2 class="panel-title">Request Grid</h2>
-            <div class="request-grid-meta">
-              <span class="legend-item"><span class="dot" style="--color: var(--blue)"></span>Data Prepare</span>
-              <span class="legend-item"><span class="dot" style="--color: var(--teal)"></span>Calculate</span>
-              <span class="legend-item"><span class="dot" style="--color: var(--orange)"></span>Clean Up</span>
-            </div>
-          </div>
-          <div class="table-scroll">
-            <table class="jobs-table request-data-table">
-              <thead id="requestGridHead"></thead>
-              <tbody id="requestGridBody"></tbody>
-            </table>
-            <div class="empty" id="requestGridEmpty">No requests match the current search.</div>
-          </div>
-        </section>
-      </section>
-
-      <section class="predefined-page hidden" id="predefinedPage">
-        <section class="page-head" style="margin-bottom: 2px">
-          <div>
-            <h1>Predefined Jobs</h1>
-            <p class="subtitle">Track planned trigger time, expected duration, and available release windows across the next 24 hours.</p>
-          </div>
-          <div class="predefined-actions">
-            <button class="action-button" type="button">
-              <svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 11h18"/></svg>
-              <span>May 21, 2024</span>
-            </button>
-            <button class="compare-button" type="button">
-              <svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
-              New Predefined Job
-            </button>
-          </div>
-        </section>
-
-        <section class="metrics" id="predefinedMetrics"></section>
-
-        <section class="predefined-layout">
-          <section class="panel table-panel">
-            <div class="timeline-toolbar">
-              <div>
-                <h2 class="panel-title">Timeline (24h)</h2>
-                <p class="subtitle" style="font-size: 12px; margin-top: 6px">Asia/Kolkata (IST)</p>
-              </div>
-              <div class="timeline-legend">
-                <span class="legend-item"><span class="dot" style="--color:#10a86b"></span>Triggered</span>
-                <span class="legend-item"><span class="dot" style="--color:#2878f0"></span>Upcoming</span>
-                <span class="legend-item"><span class="dot" style="--color:#8d99aa"></span>Completed</span>
-                <span class="legend-item"><span class="dot" style="--color:#8d63e9"></span>Release Window</span>
-              </div>
-            </div>
-            <div class="timeline-viewport">
-              <div class="timeline-grid" id="predefinedTimeline"></div>
-            </div>
-          </section>
-
-          <aside class="details-card predefined-detail" aria-label="Predefined job detail">
-            <div class="predefined-detail-head">
-              <div>
-                <strong id="predefinedDetailName">Daily Full Regression (QA)</strong>
-                <span class="status success" id="predefinedDetailStatus">Active</span>
-              </div>
-              <button class="icon-button" type="button" aria-label="More actions"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
-            </div>
-            <div class="detail-tabs">
-              <button class="tab" type="button">Details</button>
-              <button class="tab active" type="button">Trigger</button>
-              <button class="tab" type="button">History</button>
-            </div>
-            <div class="predefined-detail-body" id="predefinedDetailBody"></div>
-          </aside>
-        </section>
-
-        <section class="panel table-panel">
-          <div class="table-head">
-            <h2 class="panel-title">Jobs List</h2>
-            <div class="table-tools">
-              <label class="search">
-                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                <input id="predefinedSearch" type="search" placeholder="Search predefined job, scope, or environment">
-              </label>
-            </div>
-          </div>
-          <div class="table-scroll">
-            <table class="predefined-list">
-              <thead>
-                <tr>
-                  <th style="width: 230px">Name</th>
-                  <th style="width: 110px">Environment</th>
-                  <th style="width: 130px">Trigger</th>
-                  <th style="width: 130px">Duration</th>
-                  <th style="width: 150px">Next Release Window</th>
-                  <th style="width: 120px">Status</th>
-                  <th>Scope</th>
-                </tr>
-              </thead>
-              <tbody id="predefinedListBody"></tbody>
-            </table>
-          </div>
-        </section>
-      </section>
+      <section id="microPageHost" aria-live="polite"></section>
     </main>
 
-    <aside class="drawer" aria-label="Job details">
-      <div class="drawer-head">
-        <button class="icon-button" type="button" aria-label="Collapse details"><svg viewBox="0 0 24 24"><path d="M15 18 9 12l6-6"/></svg></button>
-        <div class="drawer-title">Job Details</div>
-        <button class="icon-button" type="button" aria-label="Close details"><svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-      </div>
-      <div class="drawer-body">
-        <section class="job-overview">
-          <div class="job-id-line">
-            <span id="detailJobId">job_01HXZ6J2P9</span>
-            <button class="copy-button" id="copyJob" type="button" aria-label="Copy job id"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><rect x="2" y="2" width="13" height="13" rx="2"/></svg></button>
-          </div>
-          <span class="status success" id="detailStatus">Success</span>
-          <dl class="overview-grid" id="overviewGrid"></dl>
-        </section>
-
-        <div class="tabs">
-          <button class="tab active" id="overviewTab" type="button">Overview</button>
-          <button class="tab" id="requestsTab" type="button">Requests (<span id="requestTabCount">0</span>)</button>
-        </div>
-
-        <div id="overviewPane">
-          <section class="details-card">
-            <h3>Job Stage Breakdown <span class="info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span></h3>
-            <div class="breakdown" id="stageBreakdown"></div>
-          </section>
-        </div>
-
-        <div class="request-list" id="requestsPane"></div>
-
-        <section class="details-card">
-          <h3>Request Step Statistics</h3>
-          <p class="subtitle" id="requestStatsSubtitle" style="font-size: 12px; margin-bottom: 14px"></p>
-          <div class="compare-table-scroll">
-            <table class="request-stats">
-              <thead>
-                <tr>
-                  <th>Step</th>
-                  <th>Mean</th>
-                  <th>P95</th>
-                  <th>P98</th>
-                  <th>Sum</th>
-                </tr>
-              </thead>
-              <tbody id="requestStatsBody"></tbody>
-            </table>
-          </div>
-          <p class="stats-footnote" id="requestStatsFootnote"></p>
-        </section>
-
-        <section class="details-card">
-          <h3>Request Breakdown</h3>
-          <p class="subtitle" style="font-size: 12px; margin-bottom: 14px">Select a request to view detailed breakdown</p>
-          <div class="request-tools">
-            <select class="request-select" id="requestSelect" aria-label="Request ID"></select>
-            <div class="request-nav">
-              <button class="icon-button" id="prevRequest" type="button" aria-label="Previous request"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
-              <button class="icon-button" id="nextRequest" type="button" aria-label="Next request"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
-            </div>
-          </div>
-          <div class="request-total">
-            <span>Total Time</span>
-            <strong id="requestTotal">00:08.742</strong>
-          </div>
-          <div class="subtle-head">
-            <span>Step</span>
-            <span>Time (s)</span>
-            <span>%</span>
-            <span></span>
-          </div>
-          <div class="breakdown" id="requestBreakdown"></div>
-        </section>
-
-        <button class="full-details" type="button">
-          View Full Request Details
-          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="m10 14 11-11"/></svg>
-        </button>
-      </div>
-    </aside>
+    <aside class="drawer" id="drawerHost" aria-label="Job details"></aside>
   </div>
 
   <script>
@@ -2377,6 +1984,92 @@
     let requestGridCompareJob = jobs[0];
     let requestGridPage = 1;
     const requestGridPageSize = 100;
+    const microPages = {
+      overview: {
+        page: "micro-pages/overview.html",
+        drawer: "micro-pages/overview-drawer.html",
+        modeClass: null,
+        render: renderOverview,
+        wire: wireOverviewEvents
+      },
+      jobs: {
+        page: "micro-pages/jobs.html",
+        drawer: "micro-pages/overview-drawer.html",
+        modeClass: null,
+        render: renderJobsPage,
+        wire: wireJobsEvents
+      },
+      compare: {
+        page: "micro-pages/compare.html",
+        drawer: null,
+        modeClass: "compare-mode",
+        render: renderCompare,
+        wire: wireCompareEvents
+      },
+      requests: {
+        page: "micro-pages/requests.html",
+        drawer: null,
+        modeClass: "requests-mode",
+        render: renderRequestGrid,
+        wire: wireRequestGridEvents
+      },
+      predefined: {
+        page: "micro-pages/predefined-jobs.html",
+        drawer: null,
+        modeClass: "predefined-mode",
+        render: renderPredefined,
+        wire: wirePredefinedEvents
+      },
+      performance: {
+        page: "micro-pages/performance.html",
+        drawer: null,
+        modeClass: "micro-mode",
+        render: renderStaticPage,
+        wire: wireStaticPageEvents
+      },
+      breakdown: {
+        page: "micro-pages/breakdown.html",
+        drawer: null,
+        modeClass: "micro-mode",
+        render: renderStaticPage,
+        wire: wireStaticPageEvents
+      },
+      alerts: {
+        page: "micro-pages/alerts.html",
+        drawer: null,
+        modeClass: "micro-mode",
+        render: renderStaticPage,
+        wire: wireStaticPageEvents
+      },
+      sla: {
+        page: "micro-pages/sla.html",
+        drawer: null,
+        modeClass: "micro-mode",
+        render: renderStaticPage,
+        wire: wireStaticPageEvents
+      },
+      settings: {
+        page: "micro-pages/settings.html",
+        drawer: null,
+        modeClass: "micro-mode",
+        render: renderStaticPage,
+        wire: wireStaticPageEvents
+      },
+      docs: {
+        page: "micro-pages/docs.html",
+        drawer: null,
+        modeClass: "micro-mode",
+        render: renderStaticPage,
+        wire: wireStaticPageEvents
+      },
+      feedback: {
+        page: "micro-pages/feedback.html",
+        drawer: null,
+        modeClass: "micro-mode",
+        render: renderStaticPage,
+        wire: wireStaticPageEvents
+      }
+    };
 
     function makeJob(id, status, createdAt, requests, values) {
       const timing = {
@@ -2793,22 +2486,46 @@
       });
     }
 
-    function switchView(view) {
+    async function loadMicroHtml(path) {
+      const response = await fetch(path, { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error(`Unable to load ${path}: ${response.status}`);
+      }
+      return response.text();
+    }
+
+    async function switchView(view) {
+      const config = microPages[view] || microPages.overview;
       currentView = view;
-      document.getElementById("appRoot").classList.toggle("compare-mode", view === "compare");
-      document.getElementById("appRoot").classList.toggle("requests-mode", view === "requests");
-      document.getElementById("appRoot").classList.toggle("predefined-mode", view === "predefined");
-      document.querySelectorAll(".overview-only").forEach(element => {
-        element.classList.toggle("hidden", view !== "overview");
+      document.querySelectorAll("[data-view]").forEach(item => {
+        item.classList.toggle("active", item.dataset.view === view);
       });
-      document.getElementById("comparePage").classList.toggle("hidden", view !== "compare");
-      document.getElementById("requestsPage").classList.toggle("hidden", view !== "requests");
-      document.getElementById("predefinedPage").classList.toggle("hidden", view !== "predefined");
-      document.getElementById("overviewNav").classList.toggle("active", view === "overview");
-      document.getElementById("compareNav").classList.toggle("active", view === "compare");
-      document.getElementById("requestNav").classList.toggle("active", view === "requests");
-      document.getElementById("predefinedNav").classList.toggle("active", view === "predefined");
-      renderAll();
+
+      const appRoot = document.getElementById("appRoot");
+      ["compare-mode", "requests-mode", "predefined-mode", "micro-mode"].forEach(className => {
+        appRoot.classList.toggle(className, config.modeClass === className);
+      });
+
+      try {
+        const [pageHtml, drawerHtml] = await Promise.all([
+          loadMicroHtml(config.page),
+          config.drawer ? loadMicroHtml(config.drawer) : Promise.resolve("")
+        ]);
+        document.getElementById("microPageHost").innerHTML = pageHtml;
+        document.getElementById("drawerHost").innerHTML = drawerHtml;
+        config.render();
+        config.wire();
+      } catch (error) {
+        document.getElementById("microPageHost").innerHTML = `
+          <section class="panel">
+            <div class="panel-head"><h2 class="panel-title">Unable to load page</h2></div>
+            <p class="subtitle">Start a local server from this folder and open the app over http:// to load micro HTML pages.</p>
+            <p class="stats-footnote">${error.message}</p>
+          </section>
+        `;
+        document.getElementById("drawerHost").innerHTML = "";
+        console.error(error);
+      }
     }
 
     function renderRequestGridControls() {
@@ -3144,6 +2861,20 @@
       renderVisualCompare();
     }
 
+    function renderOverview() {
+      renderMetrics();
+      renderCharts();
+      renderJobs();
+      renderDetails();
+    }
+
+    function renderJobsPage() {
+      renderJobs();
+      renderDetails();
+    }
+
+    function renderStaticPage() {}
+
     function renderPredefinedMetrics() {
       const activeCount = predefinedJobs.filter(job => job.state !== "Failed").length;
       const upcomingCount = predefinedJobs.filter(job => timeToMinutes(job.trigger) >= timeToMinutes("10:30")).length;
@@ -3318,12 +3049,28 @@
       renderPredefinedList();
     }
 
-    function wireEvents() {
-      document.getElementById("overviewNav").addEventListener("click", () => switchView("overview"));
-      document.getElementById("compareNav").addEventListener("click", () => switchView("compare"));
-      document.getElementById("requestNav").addEventListener("click", () => switchView("requests"));
-      document.getElementById("predefinedNav").addEventListener("click", () => switchView("predefined"));
-      document.getElementById("predefinedSearch").addEventListener("input", renderPredefinedList);
+    function wireGlobalEvents() {
+      document.querySelectorAll("[data-view]").forEach(item => {
+        item.addEventListener("click", () => switchView(item.dataset.view));
+      });
+      document.getElementById("toggleFailures").addEventListener("click", () => {
+        showFailuresOnly = !showFailuresOnly;
+        document.getElementById("toggleFailures").style.borderColor = showFailuresOnly ? "#2878f0" : "";
+        document.getElementById("toggleFailures").style.color = showFailuresOnly ? "#2878f0" : "";
+        renderAll();
+      });
+      document.getElementById("refreshData").addEventListener("click", () => {
+        const first = jobs.shift();
+        jobs.push(first);
+        selectedJob = jobs[0];
+        requestGridJob = selectedJob;
+        requestGridCompareJob = jobs.find(job => job.id !== requestGridJob.id) || null;
+        selectedRequestIndex = 0;
+        renderAll();
+      });
+    }
+
+    function wireRequestGridEvents() {
       document.getElementById("requestJobSelect").addEventListener("change", event => {
         requestGridJob = jobs.find(job => job.id === event.target.value) || requestGridJob;
         if (requestGridCompareJob?.id === requestGridJob.id) {
@@ -3354,6 +3101,9 @@
         requestGridPage += 1;
         renderRequestGrid();
       });
+    }
+
+    function wireCompareEvents() {
       document.getElementById("compareA").addEventListener("change", event => {
         compareJobA = jobs.find(job => job.id === event.target.value) || compareJobA;
         if (compareJobA.id === compareJobB.id) {
@@ -3373,22 +3123,10 @@
         renderCompare();
       });
       document.getElementById("runCompare").addEventListener("click", renderCompare);
+    }
+
+    function wireOverviewEvents() {
       document.getElementById("jobSearch").addEventListener("input", renderJobs);
-      document.getElementById("toggleFailures").addEventListener("click", () => {
-        showFailuresOnly = !showFailuresOnly;
-        document.getElementById("toggleFailures").style.borderColor = showFailuresOnly ? "#2878f0" : "";
-        document.getElementById("toggleFailures").style.color = showFailuresOnly ? "#2878f0" : "";
-        renderJobs();
-      });
-      document.getElementById("refreshData").addEventListener("click", () => {
-        const first = jobs.shift();
-        jobs.push(first);
-        selectedJob = jobs[0];
-        requestGridJob = selectedJob;
-        requestGridCompareJob = jobs.find(job => job.id !== requestGridJob.id) || null;
-        selectedRequestIndex = 0;
-        renderAll();
-      });
       document.getElementById("requestSelect").addEventListener("change", event => {
         selectedRequestIndex = Number(event.target.value);
         renderSelectedRequest();
@@ -3419,18 +3157,22 @@
       });
     }
 
-    function renderAll() {
-      renderMetrics();
-      renderCharts();
-      renderJobs();
-      renderDetails();
-      renderCompare();
-      renderRequestGrid();
-      renderPredefined();
+    function wireJobsEvents() {
+      wireOverviewEvents();
     }
 
-    wireEvents();
-    renderAll();
+    function wirePredefinedEvents() {
+      document.getElementById("predefinedSearch").addEventListener("input", renderPredefinedList);
+    }
+
+    function wireStaticPageEvents() {}
+
+    function renderAll() {
+      microPages[currentView].render();
+    }
+
+    wireGlobalEvents();
+    switchView("overview");
   </script>
 </body>
 </html>

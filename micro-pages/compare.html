@@ -1,0 +1,105 @@
+<section class="compare-page" id="comparePage">
+        <section class="page-head" style="margin-bottom: 2px">
+          <div>
+            <h1>Compare Jobs</h1>
+            <p class="subtitle">Select two jobs to compare their overall performance and breakdowns.</p>
+          </div>
+        </section>
+
+        <section class="compare-controls">
+          <label class="job-picker">
+            <strong>Job A</strong>
+            <span class="picker-field">
+              <select id="compareA" aria-label="Job A"></select>
+              <span class="status success">Success</span>
+            </span>
+          </label>
+          <button class="icon-button" id="swapCompare" type="button" aria-label="Swap compared jobs">
+            <svg viewBox="0 0 24 24"><path d="M17 3l4 4-4 4"/><path d="M3 7h18"/><path d="M7 21l-4-4 4-4"/><path d="M21 17H3"/></svg>
+          </button>
+          <label class="job-picker">
+            <strong>Job B</strong>
+            <span class="picker-field">
+              <select id="compareB" aria-label="Job B"></select>
+              <span class="status success">Success</span>
+            </span>
+          </label>
+          <button class="compare-button" id="runCompare" type="button">Compare</button>
+        </section>
+
+        <section class="compare-summary" id="compareSummary"></section>
+
+        <section class="panel compare-table-panel">
+          <div class="panel-head">
+            <h2 class="panel-title">Job Stage Breakdown <span class="info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span></h2>
+          </div>
+          <div class="compare-table-scroll">
+            <table class="compare-table">
+              <thead>
+                <tr class="group-head">
+                  <th style="width: 230px"></th>
+                  <th colspan="3" id="jobAGroup">Job A</th>
+                  <th colspan="3" id="jobBGroup">Job B</th>
+                  <th colspan="2">Difference</th>
+                  <th>Comparison</th>
+                </tr>
+                <tr>
+                  <th>Stage</th>
+                  <th>Time (s)</th>
+                  <th>% of Total</th>
+                  <th></th>
+                  <th>Time (s)</th>
+                  <th>% of Total</th>
+                  <th></th>
+                  <th>Time (s)</th>
+                  <th>%</th>
+                  <th><span class="legend-item"><span class="dot" style="--color: var(--blue)"></span>Job A</span> <span class="legend-item" style="margin-left:12px"><span class="dot" style="--color: var(--teal)"></span>Job B</span></th>
+                </tr>
+              </thead>
+              <tbody id="compareStageBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="compare-bottom">
+          <article class="panel compare-table-panel">
+            <div class="panel-head">
+              <h2 class="panel-title">Request Breakdown <span style="color:#64748b; font-weight:700">(Top 5 by Total Time)</span> <span class="info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span></h2>
+            </div>
+            <div class="compare-table-scroll">
+              <table class="compare-table request-compare-table">
+                <thead>
+                  <tr class="group-head">
+                    <th style="width: 170px"></th>
+                    <th colspan="2">Job A</th>
+                    <th colspan="2">Job B</th>
+                    <th colspan="2">Difference</th>
+                    <th>Comparison</th>
+                  </tr>
+                  <tr>
+                    <th>Request ID</th>
+                    <th>Total Time (s)</th>
+                    <th>% of Job</th>
+                    <th>Total Time (s)</th>
+                    <th>% of Job</th>
+                    <th>Time (s)</th>
+                    <th>%</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="compareRequestBody"></tbody>
+              </table>
+            </div>
+            <button class="compare-link" type="button">View all requests for both jobs <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></button>
+          </article>
+
+          <article class="panel">
+            <div class="panel-head">
+              <h2 class="panel-title">Visual Comparison <span style="color:#64748b; font-weight:700">(By % of Total Time)</span> <span class="info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span></h2>
+            </div>
+            <div class="visual-stack" id="visualCompare"></div>
+            <div class="legend" id="visualLegend"></div>
+            <div class="compare-insight" id="compareInsight"></div>
+          </article>
+        </section>
+      </section>

@@ -1,0 +1,53 @@
+<section class="page-head" style="margin-bottom: 18px">
+        <div>
+          <h1>Jobs</h1>
+          <p class="subtitle">Browse pricing jobs and inspect execution timing by stage.</p>
+        </div>
+      </section>
+
+<section class="panel table-panel">
+        <div class="table-head">
+          <h2 class="panel-title">Jobs (<span id="jobCount">0</span>)</h2>
+          <div class="table-tools">
+            <label class="search">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input id="jobSearch" type="search" placeholder="Search by Job ID, Status, or Metadata">
+            </label>
+            <button class="columns-button" type="button"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/><path d="M15 4v16"/></svg>Columns</button>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table class="jobs-table">
+            <thead>
+              <tr>
+                <th style="width: 130px">Job ID</th>
+                <th style="width: 92px">Status</th>
+                <th style="width: 90px">Total Time</th>
+                <th style="width: 88px">Trade Query</th>
+                <th style="width: 86px">VM Create</th>
+                <th style="width: 86px">Pricing</th>
+                <th style="width: 86px">VM Reclaim</th>
+                <th style="width: 90px">Result Ingest</th>
+                <th style="width: 90px">Post Process</th>
+                <th style="width: 82px">Requests</th>
+                <th style="width: 160px">Created At</th>
+                <th style="width: 34px"></th>
+              </tr>
+            </thead>
+            <tbody id="jobsBody"></tbody>
+          </table>
+          <div class="empty" id="emptyState">No jobs match the current search or filter.</div>
+        </div>
+        <div class="pagination">
+          <span>Rows per page:</span>
+          <button class="page-size" type="button">10</button>
+          <span id="rangeLabel">1-10 of 1,248</span>
+          <button class="page-button" type="button" aria-label="Previous page"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+          <button class="page-button active" type="button">1</button>
+          <button class="page-button" type="button">2</button>
+          <button class="page-button" type="button">3</button>
+          <span>...</span>
+          <button class="page-button" type="button">125</button>
+          <button class="page-button" type="button" aria-label="Next page"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+        </div>
+      </section>

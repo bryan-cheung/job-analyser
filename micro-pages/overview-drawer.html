@@ -1,0 +1,77 @@
+      <div class="drawer-head">
+        <button class="icon-button" type="button" aria-label="Collapse details"><svg viewBox="0 0 24 24"><path d="M15 18 9 12l6-6"/></svg></button>
+        <div class="drawer-title">Job Details</div>
+        <button class="icon-button" type="button" aria-label="Close details"><svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      </div>
+      <div class="drawer-body">
+        <section class="job-overview">
+          <div class="job-id-line">
+            <span id="detailJobId">job_01HXZ6J2P9</span>
+            <button class="copy-button" id="copyJob" type="button" aria-label="Copy job id"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><rect x="2" y="2" width="13" height="13" rx="2"/></svg></button>
+          </div>
+          <span class="status success" id="detailStatus">Success</span>
+          <dl class="overview-grid" id="overviewGrid"></dl>
+        </section>
+
+        <div class="tabs">
+          <button class="tab active" id="overviewTab" type="button">Overview</button>
+          <button class="tab" id="requestsTab" type="button">Requests (<span id="requestTabCount">0</span>)</button>
+        </div>
+
+        <div id="overviewPane">
+          <section class="details-card">
+            <h3>Job Stage Breakdown <span class="info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span></h3>
+            <div class="breakdown" id="stageBreakdown"></div>
+          </section>
+        </div>
+
+        <div class="request-list" id="requestsPane"></div>
+
+        <section class="details-card">
+          <h3>Request Step Statistics</h3>
+          <p class="subtitle" id="requestStatsSubtitle" style="font-size: 12px; margin-bottom: 14px"></p>
+          <div class="compare-table-scroll">
+            <table class="request-stats">
+              <thead>
+                <tr>
+                  <th>Step</th>
+                  <th>Mean</th>
+                  <th>P95</th>
+                  <th>P98</th>
+                  <th>Sum</th>
+                </tr>
+              </thead>
+              <tbody id="requestStatsBody"></tbody>
+            </table>
+          </div>
+          <p class="stats-footnote" id="requestStatsFootnote"></p>
+        </section>
+
+        <section class="details-card">
+          <h3>Request Breakdown</h3>
+          <p class="subtitle" style="font-size: 12px; margin-bottom: 14px">Select a request to view detailed breakdown</p>
+          <div class="request-tools">
+            <select class="request-select" id="requestSelect" aria-label="Request ID"></select>
+            <div class="request-nav">
+              <button class="icon-button" id="prevRequest" type="button" aria-label="Previous request"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+              <button class="icon-button" id="nextRequest" type="button" aria-label="Next request"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+            </div>
+          </div>
+          <div class="request-total">
+            <span>Total Time</span>
+            <strong id="requestTotal">00:08.742</strong>
+          </div>
+          <div class="subtle-head">
+            <span>Step</span>
+            <span>Time (s)</span>
+            <span>%</span>
+            <span></span>
+          </div>
+          <div class="breakdown" id="requestBreakdown"></div>
+        </section>
+
+        <button class="full-details" type="button">
+          View Full Request Details
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="m10 14 11-11"/></svg>
+        </button>
+      </div>

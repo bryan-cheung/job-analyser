@@ -1,0 +1,84 @@
+<section class="predefined-page" id="predefinedPage">
+        <section class="page-head" style="margin-bottom: 2px">
+          <div>
+            <h1>Predefined Jobs</h1>
+            <p class="subtitle">Track planned trigger time, expected duration, and available release windows across the next 24 hours.</p>
+          </div>
+          <div class="predefined-actions">
+            <button class="action-button" type="button">
+              <svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 11h18"/></svg>
+              <span>May 21, 2024</span>
+            </button>
+            <button class="compare-button" type="button">
+              <svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+              New Predefined Job
+            </button>
+          </div>
+        </section>
+
+        <section class="metrics" id="predefinedMetrics"></section>
+
+        <section class="predefined-layout">
+          <section class="panel table-panel">
+            <div class="timeline-toolbar">
+              <div>
+                <h2 class="panel-title">Timeline (24h)</h2>
+                <p class="subtitle" style="font-size: 12px; margin-top: 6px">Asia/Kolkata (IST)</p>
+              </div>
+              <div class="timeline-legend">
+                <span class="legend-item"><span class="dot" style="--color:#10a86b"></span>Triggered</span>
+                <span class="legend-item"><span class="dot" style="--color:#2878f0"></span>Upcoming</span>
+                <span class="legend-item"><span class="dot" style="--color:#8d99aa"></span>Completed</span>
+                <span class="legend-item"><span class="dot" style="--color:#8d63e9"></span>Release Window</span>
+              </div>
+            </div>
+            <div class="timeline-viewport">
+              <div class="timeline-grid" id="predefinedTimeline"></div>
+            </div>
+          </section>
+
+          <aside class="details-card predefined-detail" aria-label="Predefined job detail">
+            <div class="predefined-detail-head">
+              <div>
+                <strong id="predefinedDetailName">Daily Full Regression (QA)</strong>
+                <span class="status success" id="predefinedDetailStatus">Active</span>
+              </div>
+              <button class="icon-button" type="button" aria-label="More actions"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+            </div>
+            <div class="detail-tabs">
+              <button class="tab" type="button">Details</button>
+              <button class="tab active" type="button">Trigger</button>
+              <button class="tab" type="button">History</button>
+            </div>
+            <div class="predefined-detail-body" id="predefinedDetailBody"></div>
+          </aside>
+        </section>
+
+        <section class="panel table-panel">
+          <div class="table-head">
+            <h2 class="panel-title">Jobs List</h2>
+            <div class="table-tools">
+              <label class="search">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input id="predefinedSearch" type="search" placeholder="Search predefined job, scope, or environment">
+              </label>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="predefined-list">
+              <thead>
+                <tr>
+                  <th style="width: 230px">Name</th>
+                  <th style="width: 110px">Environment</th>
+                  <th style="width: 130px">Trigger</th>
+                  <th style="width: 130px">Duration</th>
+                  <th style="width: 150px">Next Release Window</th>
+                  <th style="width: 120px">Status</th>
+                  <th>Scope</th>
+                </tr>
+              </thead>
+              <tbody id="predefinedListBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
