@@ -53,12 +53,14 @@
     }
 
     .app.compare-mode,
-    .app.requests-mode {
+    .app.requests-mode,
+    .app.predefined-mode {
       grid-template-columns: 260px minmax(0, 1fr);
     }
 
     .app.compare-mode .drawer,
-    .app.requests-mode .drawer {
+    .app.requests-mode .drawer,
+    .app.predefined-mode .drawer {
       display: none;
     }
 
@@ -195,7 +197,8 @@
     }
 
     .app.compare-mode .main,
-    .app.requests-mode .main {
+    .app.requests-mode .main,
+    .app.predefined-mode .main {
       grid-column: 2;
     }
 
@@ -1354,6 +1357,287 @@
       font-weight: 800;
     }
 
+    .predefined-page {
+      display: grid;
+      gap: 16px;
+    }
+
+    .predefined-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .predefined-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 356px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .timeline-toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .timeline-toolbar .table-tools {
+      flex-wrap: wrap;
+    }
+
+    .timeline-legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: #40516b;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .timeline-viewport {
+      overflow-x: auto;
+      padding-top: 10px;
+    }
+
+    .timeline-grid {
+      min-width: 1060px;
+      position: relative;
+    }
+
+    .time-scale,
+    .timeline-row {
+      display: grid;
+      grid-template-columns: 220px minmax(760px, 1fr);
+    }
+
+    .time-scale {
+      height: 32px;
+      color: #53647c;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .time-axis {
+      position: relative;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .time-tick {
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+
+    .timeline-row {
+      min-height: 50px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .timeline-row:last-child {
+      border-bottom: 0;
+    }
+
+    .timeline-label {
+      min-width: 0;
+      padding: 9px 12px 9px 0;
+      color: #22314a;
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+
+    .timeline-label span {
+      display: block;
+      margin-top: 3px;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .timeline-lane {
+      position: relative;
+      min-height: 50px;
+      background-image: repeating-linear-gradient(to right, transparent 0, transparent calc(12.5% - 1px), #e8eef7 calc(12.5% - 1px), #e8eef7 12.5%);
+    }
+
+    .timeline-card {
+      position: absolute;
+      top: 12px;
+      height: 26px;
+      min-width: 52px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--card-color);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 8px;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+      box-shadow: 0 7px 16px rgba(16, 24, 40, 0.07);
+    }
+
+    .timeline-card.triggered {
+      --card-bg: #e8fbf4;
+      --card-border: #a6e5c9;
+      --card-color: #087a4d;
+    }
+
+    .timeline-card.upcoming {
+      --card-bg: #eaf3ff;
+      --card-border: #b7d6ff;
+      --card-color: #075dcc;
+    }
+
+    .timeline-card.completed {
+      --card-bg: #edf1f7;
+      --card-border: #cfd8e6;
+      --card-color: #40516b;
+    }
+
+    .timeline-card.failed {
+      --card-bg: #fff0f0;
+      --card-border: #ffc3c3;
+      --card-color: #b42318;
+    }
+
+    .timeline-card.release-window {
+      --card-bg: repeating-linear-gradient(-45deg, rgba(141, 99, 233, 0.12) 0 4px, rgba(255, 255, 255, 0.86) 4px 8px);
+      --card-border: #c9b7fb;
+      --card-color: #5f3fc4;
+      justify-content: center;
+      box-shadow: none;
+    }
+
+    .timeline-now {
+      position: absolute;
+      top: 31px;
+      bottom: 0;
+      width: 1px;
+      background: #ff4d4f;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .timeline-now::before {
+      content: attr(data-time);
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 3px 6px;
+      border-radius: 4px;
+      color: #ffffff;
+      background: #ff4d4f;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .predefined-detail {
+      position: sticky;
+      top: 82px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .predefined-detail-head {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .predefined-detail-head strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    .detail-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .predefined-detail-body {
+      display: grid;
+      gap: 16px;
+      padding: 16px;
+    }
+
+    .detail-section {
+      display: grid;
+      gap: 10px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .detail-section:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .detail-section h3 {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+      color: #40516b;
+      font-size: 12px;
+    }
+
+    .detail-grid span {
+      display: block;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+
+    .detail-grid strong {
+      color: #22314a;
+    }
+
+    .predefined-list {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 12px;
+    }
+
+    .predefined-list th,
+    .predefined-list td {
+      height: 42px;
+      padding: 0 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .predefined-list th {
+      color: #334155;
+      background: #fbfcfe;
+      font-weight: 800;
+    }
+
+    .predefined-list tr.selected {
+      background: #eaf3ff;
+      box-shadow: inset 0 0 0 1px #a8cfff;
+    }
+
     svg {
       width: 18px;
       height: 18px;
@@ -1367,6 +1651,10 @@
     @media (max-width: 1500px) {
       .metrics {
         grid-template-columns: repeat(3, minmax(160px, 1fr));
+      }
+
+      .predefined-page .metrics {
+        grid-template-columns: repeat(5, minmax(128px, 1fr));
       }
 
       .charts-grid {
@@ -1384,7 +1672,8 @@
       }
 
       .app.compare-mode,
-      .app.requests-mode {
+      .app.requests-mode,
+      .app.predefined-mode {
         grid-template-columns: 76px minmax(0, 1fr);
       }
 
@@ -1412,7 +1701,8 @@
       }
 
       .app.compare-mode .main,
-      .app.requests-mode .main {
+      .app.requests-mode .main,
+      .app.predefined-mode .main {
         grid-column: auto;
       }
 
@@ -1449,7 +1739,7 @@
         flex-direction: column;
       }
 
-      .metrics, .charts-grid {
+      .metrics, .predefined-page .metrics, .charts-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1492,8 +1782,13 @@
       .compare-controls,
       .compare-summary,
       .compare-bottom,
-      .request-grid-toolbar {
+      .request-grid-toolbar,
+      .predefined-layout {
         grid-template-columns: 1fr;
+      }
+
+      .predefined-detail {
+        position: static;
       }
 
       .compare-controls .icon-button {
@@ -1584,6 +1879,7 @@
         <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M3 11h18"/></svg><span>Jobs</span></button>
         <button class="nav-item" id="compareNav" type="button"><svg viewBox="0 0 24 24"><path d="M8 3v18"/><path d="M16 3v18"/><path d="M3 8h18"/><path d="M3 16h18"/><path d="m7 12-3-3 3-3"/><path d="m17 12 3 3-3 3"/></svg><span>Compare Jobs</span></button>
         <button class="nav-item" id="requestNav" type="button"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h6"/></svg><span>Requests</span></button>
+        <button class="nav-item" id="predefinedNav" type="button"><svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 11h18"/><path d="M7 15h3"/><path d="M14 15h3"/></svg><span>Predefined Jobs</span></button>
         <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-7"/></svg><span>Performance</span></button>
         <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Breakdown</span></button>
       </nav>
@@ -1836,6 +2132,91 @@
           </div>
         </section>
       </section>
+
+      <section class="predefined-page hidden" id="predefinedPage">
+        <section class="page-head" style="margin-bottom: 2px">
+          <div>
+            <h1>Predefined Jobs</h1>
+            <p class="subtitle">Track planned trigger time, expected duration, and available release windows across the next 24 hours.</p>
+          </div>
+          <div class="predefined-actions">
+            <button class="action-button" type="button">
+              <svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 11h18"/></svg>
+              <span>May 21, 2024</span>
+            </button>
+            <button class="compare-button" type="button">
+              <svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+              New Predefined Job
+            </button>
+          </div>
+        </section>
+
+        <section class="metrics" id="predefinedMetrics"></section>
+
+        <section class="predefined-layout">
+          <section class="panel table-panel">
+            <div class="timeline-toolbar">
+              <div>
+                <h2 class="panel-title">Timeline (24h)</h2>
+                <p class="subtitle" style="font-size: 12px; margin-top: 6px">Asia/Kolkata (IST)</p>
+              </div>
+              <div class="timeline-legend">
+                <span class="legend-item"><span class="dot" style="--color:#10a86b"></span>Triggered</span>
+                <span class="legend-item"><span class="dot" style="--color:#2878f0"></span>Upcoming</span>
+                <span class="legend-item"><span class="dot" style="--color:#8d99aa"></span>Completed</span>
+                <span class="legend-item"><span class="dot" style="--color:#8d63e9"></span>Release Window</span>
+              </div>
+            </div>
+            <div class="timeline-viewport">
+              <div class="timeline-grid" id="predefinedTimeline"></div>
+            </div>
+          </section>
+
+          <aside class="details-card predefined-detail" aria-label="Predefined job detail">
+            <div class="predefined-detail-head">
+              <div>
+                <strong id="predefinedDetailName">Daily Full Regression (QA)</strong>
+                <span class="status success" id="predefinedDetailStatus">Active</span>
+              </div>
+              <button class="icon-button" type="button" aria-label="More actions"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+            </div>
+            <div class="detail-tabs">
+              <button class="tab" type="button">Details</button>
+              <button class="tab active" type="button">Trigger</button>
+              <button class="tab" type="button">History</button>
+            </div>
+            <div class="predefined-detail-body" id="predefinedDetailBody"></div>
+          </aside>
+        </section>
+
+        <section class="panel table-panel">
+          <div class="table-head">
+            <h2 class="panel-title">Jobs List</h2>
+            <div class="table-tools">
+              <label class="search">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input id="predefinedSearch" type="search" placeholder="Search predefined job, scope, or environment">
+              </label>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="predefined-list">
+              <thead>
+                <tr>
+                  <th style="width: 230px">Name</th>
+                  <th style="width: 110px">Environment</th>
+                  <th style="width: 130px">Trigger</th>
+                  <th style="width: 130px">Duration</th>
+                  <th style="width: 150px">Next Release Window</th>
+                  <th style="width: 120px">Status</th>
+                  <th>Scope</th>
+                </tr>
+              </thead>
+              <tbody id="predefinedListBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
     </main>
 
     <aside class="drawer" aria-label="Job details">
@@ -1959,7 +2340,33 @@
       { date: "May 18", values: [34, 22, 47, 25, 30, 36] }
     ];
 
+    const releaseWindows = [
+      { env: "QA", start: "00:00", end: "06:00" },
+      { env: "QA", start: "14:00", end: "18:00" },
+      { env: "QA", start: "21:00", end: "24:00" },
+      { env: "UAT", start: "01:00", end: "07:00" },
+      { env: "UAT", start: "13:00", end: "17:00" },
+      { env: "UAT", start: "20:00", end: "24:00" },
+      { env: "Pre-Prod", start: "02:00", end: "10:00" },
+      { env: "Pre-Prod", start: "12:00", end: "16:00" },
+      { env: "Pre-Prod", start: "19:00", end: "23:00" },
+      { env: "Prod", start: "03:00", end: "11:00" },
+      { env: "Prod", start: "15:00", end: "20:00" }
+    ];
+
+    const predefinedJobs = [
+      makePredefinedJob("pre_qa_daily", "Daily Full Regression (QA)", "QA", "Daily", "10:00", 105, "Triggered", "L2 - Pricing Full Pack", 243, "01:42:18", "May 22, 2024 10:00 AM"),
+      makePredefinedJob("pre_uat_smoke", "Intraday Smoke (UAT)", "UAT", "Every 2 Hours", "08:00", 25, "Completed", "Smoke Pack", 64, "00:21:02", "May 21, 2024 12:00 PM"),
+      makePredefinedJob("pre_prod_eod", "EOD Regression (Pre-Prod)", "Pre-Prod", "Daily", "18:00", 90, "Upcoming", "Pricing EOD Pack", 186, "01:26:40", "May 21, 2024 6:00 PM"),
+      makePredefinedJob("pre_uat_critical", "Critical Flow Check (UAT)", "UAT", "Every 4 Hours", "16:00", 20, "Completed", "Critical Flow Pack", 82, "00:18:51", "May 21, 2024 8:00 PM"),
+      makePredefinedJob("pre_qa_weekly", "Weekly Full Regression (QA)", "QA", "Weekly", "02:00", 150, "Completed", "L2 - Pricing Full Pack", 243, "02:31:10", "May 26, 2024 2:00 AM"),
+      makePredefinedJob("pre_prod_monthly", "Monthly Regression (Prod)", "Prod", "Monthly", "01:00", 135, "Completed", "Prod Pricing Pack", 312, "02:11:44", "Jun 1, 2024 1:00 AM"),
+      makePredefinedJob("pre_qa_ad_hoc", "Ad-hoc Regression (QA)", "QA", "On Demand", "09:15", 25, "Failed", "Hotfix Validation", 97, "00:24:32", "On demand"),
+      makePredefinedJob("pre_uat_refresh", "Data Refresh Check (UAT)", "UAT", "Daily", "23:30", 20, "Completed", "Data Freshness Pack", 44, "00:19:28", "May 22, 2024 11:30 PM")
+    ];
+
     let selectedJob = jobs[1];
+    let selectedPredefinedJob = predefinedJobs[0];
     let selectedRequestIndex = 16;
     let showFailuresOnly = false;
     let activeTab = "overview";
@@ -2028,6 +2435,24 @@
         minute: "2-digit",
         second: "2-digit"
       });
+    }
+
+    function makePredefinedJob(id, name, environment, schedule, trigger, durationMinutes, state, scope, testCases, averageDuration, nextTrigger) {
+      return {
+        id,
+        name,
+        environment,
+        schedule,
+        trigger,
+        durationMinutes,
+        state,
+        scope,
+        testCases,
+        averageDuration,
+        nextTrigger,
+        lastRun: state === "Upcoming" ? "May 20, 2024" : "May 21, 2024",
+        owner: environment === "Prod" ? "Release Management" : `${environment} Automation`
+      };
     }
 
     function totalSeconds(job) {
@@ -2111,6 +2536,40 @@
       return formatLongDuration(seconds);
     }
 
+    function timeToMinutes(value) {
+      const [hours, minutes] = value.split(":").map(Number);
+      return hours * 60 + minutes;
+    }
+
+    function minutesToClock(value) {
+      const minutes = Math.max(0, Math.min(1440, value));
+      const hours = Math.floor(minutes / 60);
+      const mins = minutes % 60;
+      return `${String(hours).padStart(2, "0")}:${String(mins).padStart(2, "0")}`;
+    }
+
+    function formatHour(value) {
+      return value === 1440 ? "24:00" : minutesToClock(value);
+    }
+
+    function formatJobDuration(minutes) {
+      const hours = Math.floor(minutes / 60);
+      const remaining = minutes % 60;
+      if (hours && remaining) return `${hours}h ${remaining}m`;
+      if (hours) return `${hours}h`;
+      return `${remaining}m`;
+    }
+
+    function statusClass(state) {
+      return state === "Failed" ? "failed" : "success";
+    }
+
+    function nextReleaseWindow(job) {
+      const trigger = timeToMinutes(job.trigger);
+      const windows = releaseWindows.filter(window => window.env === job.environment);
+      return windows.find(window => timeToMinutes(window.start) >= trigger) || windows[0];
+    }
+
     function formatSignedDuration(seconds) {
       const sign = seconds >= 0 ? "+" : "-";
       return `${sign}${formatDuration(Math.abs(seconds))}`;
@@ -2131,7 +2590,10 @@
         timer: '<svg viewBox="0 0 24 24"><path d="M10 2h4"/><path d="M12 14V9"/><circle cx="12" cy="14" r="8"/><path d="m19 5-2 2"/></svg>',
         trend: '<svg viewBox="0 0 24 24"><path d="m4 16 5-5 4 4 7-7"/><path d="M15 8h5v5"/></svg>',
         check: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>',
-        receipt: '<svg viewBox="0 0 24 24"><path d="M7 3h10v18l-2-1-2 1-2-1-2 1-2-1z"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h4"/></svg>'
+        receipt: '<svg viewBox="0 0 24 24"><path d="M7 3h10v18l-2-1-2 1-2-1-2 1-2-1z"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h4"/></svg>',
+        calendar: '<svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 11h18"/></svg>',
+        play: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/></svg>',
+        window: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 4v16"/></svg>'
       };
       return icons[name];
     }
@@ -2335,14 +2797,17 @@
       currentView = view;
       document.getElementById("appRoot").classList.toggle("compare-mode", view === "compare");
       document.getElementById("appRoot").classList.toggle("requests-mode", view === "requests");
+      document.getElementById("appRoot").classList.toggle("predefined-mode", view === "predefined");
       document.querySelectorAll(".overview-only").forEach(element => {
         element.classList.toggle("hidden", view !== "overview");
       });
       document.getElementById("comparePage").classList.toggle("hidden", view !== "compare");
       document.getElementById("requestsPage").classList.toggle("hidden", view !== "requests");
+      document.getElementById("predefinedPage").classList.toggle("hidden", view !== "predefined");
       document.getElementById("overviewNav").classList.toggle("active", view === "overview");
       document.getElementById("compareNav").classList.toggle("active", view === "compare");
       document.getElementById("requestNav").classList.toggle("active", view === "requests");
+      document.getElementById("predefinedNav").classList.toggle("active", view === "predefined");
       renderAll();
     }
 
@@ -2679,10 +3144,186 @@
       renderVisualCompare();
     }
 
+    function renderPredefinedMetrics() {
+      const activeCount = predefinedJobs.filter(job => job.state !== "Failed").length;
+      const upcomingCount = predefinedJobs.filter(job => timeToMinutes(job.trigger) >= timeToMinutes("10:30")).length;
+      const releaseCount = releaseWindows.filter(window => timeToMinutes(window.end) > timeToMinutes("10:30")).length;
+      const averageMinutes = Math.round(predefinedJobs.reduce((sum, job) => sum + job.durationMinutes, 0) / predefinedJobs.length);
+      const metricData = [
+        { label: "Total Predefined Jobs", value: String(predefinedJobs.length), trend: `${activeCount} active`, icon: "briefcase", color: "#8d63e9", bg: "#f1ebff" },
+        { label: "Jobs Triggered Today", value: "6", trend: "+ 20% vs yesterday", icon: "play", color: "#10a86b", bg: "#e8fbf4" },
+        { label: "Average Duration", value: formatJobDuration(averageMinutes), trend: "- 8% vs yesterday", icon: "timer", color: "#2878f0", bg: "#eaf3ff" },
+        { label: "Upcoming Triggers", value: String(upcomingCount), trend: "next 24h", icon: "calendar", color: "#ff842b", bg: "#fff0e7" },
+        { label: "Release Windows", value: String(releaseCount), trend: "available next 24h", icon: "window", color: "#8d63e9", bg: "#f1ebff" }
+      ];
+      document.getElementById("predefinedMetrics").innerHTML = metricData.map(metric => `
+        <article class="metric-card">
+          <div>
+            <div class="metric-icon" style="color:${metric.color}; background:${metric.bg}">${iconSvg(metric.icon)}</div>
+            <div class="metric-label">${metric.label}</div>
+            <div class="metric-value">${metric.value}</div>
+          </div>
+          <div class="trend"><span>${metric.trend}</span></div>
+        </article>
+      `).join("");
+    }
+
+    function timelineBlockStyle(start, end) {
+      const left = timeToMinutes(start) / 1440 * 100;
+      const width = (timeToMinutes(end) - timeToMinutes(start)) / 1440 * 100;
+      return `left:${left}%; width:${Math.max(width, 2.4)}%`;
+    }
+
+    function jobTimelineRow(job) {
+      const start = timeToMinutes(job.trigger);
+      const end = Math.min(1440, start + job.durationMinutes);
+      return `
+        <div class="timeline-row">
+          <button class="timeline-label job-link" type="button" data-predefined-job="${job.id}">
+            ${job.name}
+            <span>${job.schedule} - ${job.trigger}</span>
+          </button>
+          <div class="timeline-lane">
+            <button class="timeline-card ${job.state.toLowerCase()}" type="button" data-predefined-job="${job.id}" style="${timelineBlockStyle(job.trigger, minutesToClock(end))}">
+              ${job.state === "Upcoming" ? iconSvg("play") : iconSvg("check")}
+              ${job.trigger} - ${minutesToClock(end)}
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function releaseTimelineRow(environment) {
+      const windows = releaseWindows.filter(window => window.env === environment);
+      return `
+        <div class="timeline-row">
+          <div class="timeline-label">Available Release Window (${environment})</div>
+          <div class="timeline-lane">
+            ${windows.map(window => `
+              <span class="timeline-card release-window" style="${timelineBlockStyle(window.start, window.end)}">${window.start} - ${window.end}</span>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderPredefinedTimeline() {
+      const ticks = Array.from({ length: 9 }, (_, index) => index * 180);
+      const environments = ["QA", "UAT", "Pre-Prod", "Prod"];
+      document.getElementById("predefinedTimeline").innerHTML = `
+        <div class="time-scale">
+          <div></div>
+          <div class="time-axis">
+            ${ticks.map(tick => `<span class="time-tick" style="left:${tick / 1440 * 100}%">${formatHour(tick)}</span>`).join("")}
+          </div>
+        </div>
+        <div class="timeline-now" data-time="10:30" style="left: calc(220px + ${(timeToMinutes("10:30") / 1440) * 100}% - ${(timeToMinutes("10:30") / 1440) * 220}px)"></div>
+        ${predefinedJobs.map(jobTimelineRow).join("")}
+        ${environments.map(releaseTimelineRow).join("")}
+      `;
+      document.querySelectorAll("#predefinedTimeline [data-predefined-job]").forEach(element => {
+        element.addEventListener("click", () => {
+          selectedPredefinedJob = predefinedJobs.find(job => job.id === element.dataset.predefinedJob) || selectedPredefinedJob;
+          renderPredefined();
+        });
+      });
+    }
+
+    function renderPredefinedDetail() {
+      const job = selectedPredefinedJob;
+      const releaseWindow = nextReleaseWindow(job);
+      const trigger = timeToMinutes(job.trigger);
+      const end = Math.min(1440, trigger + job.durationMinutes);
+      document.getElementById("predefinedDetailName").textContent = job.name;
+      const status = document.getElementById("predefinedDetailStatus");
+      status.textContent = job.state === "Failed" ? "Needs Review" : "Active";
+      status.className = `status ${statusClass(job.state)}`;
+      document.getElementById("predefinedDetailBody").innerHTML = `
+        <section class="detail-section">
+          <h3>Trigger Time</h3>
+          <div class="detail-grid">
+            <div><span>Schedule</span><strong>${job.schedule}</strong></div>
+            <div><span>Trigger Time</span><strong>${job.trigger} IST</strong></div>
+            <div><span>Next Trigger</span><strong>${job.nextTrigger}</strong></div>
+            <div><span>Timezone</span><strong>Asia/Kolkata</strong></div>
+          </div>
+        </section>
+        <section class="detail-section">
+          <h3>Duration</h3>
+          <div class="detail-grid">
+            <div><span>Expected</span><strong>${formatJobDuration(job.durationMinutes)}</strong></div>
+            <div><span>Window</span><strong>${job.trigger} - ${minutesToClock(end)}</strong></div>
+            <div><span>Average</span><strong>${job.averageDuration}</strong></div>
+            <div><span>Last Run</span><strong>${job.lastRun}</strong></div>
+          </div>
+        </section>
+        <section class="detail-section">
+          <h3>Release Window (${job.environment})</h3>
+          <div class="detail-grid">
+            <div><span>Next Available</span><strong>${releaseWindow.start} - ${releaseWindow.end}</strong></div>
+            <div><span>Windows Next 24h</span><strong>${releaseWindows.filter(window => window.env === job.environment).length}</strong></div>
+          </div>
+        </section>
+        <section class="detail-section">
+          <h3>Scope</h3>
+          <div class="detail-grid">
+            <div><span>Test Pack</span><strong>${job.scope}</strong></div>
+            <div><span>Test Cases</span><strong>${formatInteger(job.testCases)}</strong></div>
+            <div><span>Environment</span><strong>${job.environment}</strong></div>
+            <div><span>Owner</span><strong>${job.owner}</strong></div>
+          </div>
+        </section>
+        <div class="predefined-actions">
+          <button class="action-button" type="button"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>Edit Job</button>
+          <button class="compare-button" type="button"><svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>Run Now</button>
+        </div>
+      `;
+    }
+
+    function renderPredefinedList() {
+      const query = document.getElementById("predefinedSearch").value.trim().toLowerCase();
+      const visibleJobs = predefinedJobs.filter(job => [
+        job.name,
+        job.environment,
+        job.schedule,
+        job.scope,
+        job.state
+      ].join(" ").toLowerCase().includes(query));
+      document.getElementById("predefinedListBody").innerHTML = visibleJobs.map(job => {
+        const releaseWindow = nextReleaseWindow(job);
+        return `
+          <tr class="${job.id === selectedPredefinedJob.id ? "selected" : ""}" data-predefined-job="${job.id}">
+            <td><button class="job-link" type="button" data-predefined-job="${job.id}">${job.name}</button></td>
+            <td>${job.environment}</td>
+            <td>${job.schedule} at ${job.trigger}</td>
+            <td>${formatJobDuration(job.durationMinutes)}</td>
+            <td>${releaseWindow.start} - ${releaseWindow.end}</td>
+            <td><span class="status ${statusClass(job.state)}">${job.state}</span></td>
+            <td>${job.scope}</td>
+          </tr>
+        `;
+      }).join("");
+      document.querySelectorAll("#predefinedListBody [data-predefined-job]").forEach(element => {
+        element.addEventListener("click", () => {
+          selectedPredefinedJob = predefinedJobs.find(job => job.id === element.dataset.predefinedJob) || selectedPredefinedJob;
+          renderPredefined();
+        });
+      });
+    }
+
+    function renderPredefined() {
+      renderPredefinedMetrics();
+      renderPredefinedTimeline();
+      renderPredefinedDetail();
+      renderPredefinedList();
+    }
+
     function wireEvents() {
       document.getElementById("overviewNav").addEventListener("click", () => switchView("overview"));
       document.getElementById("compareNav").addEventListener("click", () => switchView("compare"));
       document.getElementById("requestNav").addEventListener("click", () => switchView("requests"));
+      document.getElementById("predefinedNav").addEventListener("click", () => switchView("predefined"));
+      document.getElementById("predefinedSearch").addEventListener("input", renderPredefinedList);
       document.getElementById("requestJobSelect").addEventListener("change", event => {
         requestGridJob = jobs.find(job => job.id === event.target.value) || requestGridJob;
         if (requestGridCompareJob?.id === requestGridJob.id) {
@@ -2785,6 +3426,7 @@
       renderDetails();
       renderCompare();
       renderRequestGrid();
+      renderPredefined();
     }
 
     wireEvents();
